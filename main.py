@@ -3,7 +3,9 @@
 # https://data.matr.io/1/api/v1/file/5c86bd64fa2ede00015ddbb2/download
 
 import argparse
+import os
 import sys
+from pathlib import Path
 
 import pandas as pd
 
@@ -35,11 +37,22 @@ parser.set_defaults(DL=False)
 args = parser.parse_args()
 
 if __name__ == '__main__':
-    args.data_path = 'C:/sim_data/2S_2P_01-Aug-2022'
-    args.main_path = 'C:/sim_data'
+    args.main_path = 'D:/Severson_battery_data/'
+    if not os.path.exists(args.main_path):
+        os.makedirs(args.main_path)
     args.plot_path = args.main_path + '/plots'
-    # data_maker(args)
-    pandas_maker(args)
+
+    my_file = Path(args.main_path + 'batch1.pkl')
+    if my_file.is_file():
+        print('The batch file(batch1.pkl) already exists, no need to convert mat file to batch file!')
+    else:
+        data_maker(args)
+
+    my_file = Path(args.main_path + 'severson_main.pkl')
+    if my_file.is_file():
+        print('The main file(severson_main.pkl) already exists, no need to create pandas dataframes from batch file!')
+    else:
+        pandas_maker(args)
     if args.pack_type == '2S2P':
         args.file_name = 'data_2S2P.pkl'
     else:
