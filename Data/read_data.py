@@ -36,15 +36,6 @@ def download(url: str, fname: str):
         for data in resp.iter_content(chunk_size=1024):
             size = file.write(data)
             bar.update(size)
-# class DownloadProgressBar(tqdm):
-#     def update_to(self, b=1, bsize=1, tsize=None):
-#         if tsize is not None:
-#             self.total = tsize
-#         self.update(b * bsize - self.n)
-# def download_url(url, output_path):
-#     with DownloadProgressBar(unit='B', unit_scale=True,
-#                              miniters=1, desc=url.split('/')[-1]) as t:
-#         urllib.request.urlretrieve(url, filename=output_path, reporthook=t.update_to)
 
 def data_maker(args):
     filename = '2018-04-12_batchdata_updated_struct_errorcorrect.mat'
@@ -53,6 +44,7 @@ def data_maker(args):
         print('Downloading the mat file.')
         download("https://data.matr.io/1/api/v1/file/5c86bd64fa2ede00015ddbb2/download", args.main_path + filename)
 
+    print('Starting converting mat file to batch file.')
     matFilename = args.main_path + filename
     f = h5py.File(matFilename)
     batch = f['batch']
@@ -100,47 +92,47 @@ def data_maker(args):
 
 
 def pandas_maker(args):
+    print('Starting creating pandas dataframe from mat file.')
 
-        data_folder = 'D:/Severson_battery_data/'
-        batch1 = pickle.load(open(r'D:/Severson_battery_data/batch1.pkl', 'rb'))
+    batch1 = pickle.load(open(args.main_path + 'batch1.pkl', 'rb'))
 
-        def main_data(battery, cycle):
-            temp_df = pd.DataFrame()
+    def main_data(battery, cycle):
+        temp_df = pd.DataFrame()
 
-            temp_df['I'] = batch1[battery]['cycles'][cycle]['I']
-            temp_df['Qc'] = batch1[battery]['cycles'][cycle]['Qc']
-            temp_df['Qd'] = batch1[battery]['cycles'][cycle]['Qd']
-            temp_df['T'] = batch1[battery]['cycles'][cycle]['T']
-            temp_df['V'] = batch1[battery]['cycles'][cycle]['V']
-            temp_df['t'] = batch1[battery]['cycles'][cycle]['t']
-            temp_df['counter'] = temp_df.index
+        temp_df['I'] = batch1[battery]['cycles'][cycle]['I']
+        temp_df['Qc'] = batch1[battery]['cycles'][cycle]['Qc']
+        temp_df['Qd'] = batch1[battery]['cycles'][cycle]['Qd']
+        temp_df['T'] = batch1[battery]['cycles'][cycle]['T']
+        temp_df['V'] = batch1[battery]['cycles'][cycle]['V']
+        temp_df['t'] = batch1[battery]['cycles'][cycle]['t']
+        temp_df['counter'] = temp_df.index
 
-            temp_df['cycle'] = int(cycle)
-            temp_df['battery_name'] = battery
-            temp_df['charge_policy'] = batch1[battery]['charge_policy']
-            temp_df['cycle_life'] = np.squeeze(batch1[battery]['cycle_life'])
+        temp_df['cycle'] = int(cycle)
+        temp_df['battery_name'] = battery
+        temp_df['charge_policy'] = batch1[battery]['charge_policy']
+        temp_df['cycle_life'] = np.squeeze(batch1[battery]['cycle_life'])
 
-            temp_df2 = pd.DataFrame()
+        temp_df2 = pd.DataFrame()
 
-            temp_df2['Qdlin'] = batch1[battery]['cycles'][cycle]['Qdlin']
-            temp_df2['Tdlin'] = batch1[battery]['cycles'][cycle]['Tdlin']
-            temp_df2['dQdV'] = batch1[battery]['cycles'][cycle]['dQdV']
+        temp_df2['Qdlin'] = batch1[battery]['cycles'][cycle]['Qdlin']
+        temp_df2['Tdlin'] = batch1[battery]['cycles'][cycle]['Tdlin']
+        temp_df2['dQdV'] = batch1[battery]['cycles'][cycle]['dQdV']
 
-            temp_df2['cycle'] = int(cycle)
-            temp_df2['battery_name'] = battery
-            temp_df2['charge_policy'] = batch1[battery]['charge_policy']
-            temp_df2['cycle_life'] = np.squeeze(batch1[battery]['cycle_life'])
-            temp_df2['counter'] = temp_df2.index
+        temp_df2['cycle'] = int(cycle)
+        temp_df2['battery_name'] = battery
+        temp_df2['charge_policy'] = batch1[battery]['charge_policy']
+        temp_df2['cycle_life'] = np.squeeze(batch1[battery]['cycle_life'])
+        temp_df2['counter'] = temp_df2.index
 
-            return temp_df, temp_df2
+        return temp_df, temp_df2
 
-        list_main = [main_data(battery, cycle) for battery in batch1.keys() for cycle in batch1[battery]['cycles']]
+    list_main = [main_data(battery, cycle) for battery in batch1.keys() for cycle in batch1[battery]['cycles']]
 
-        del batch1
-        main_df = pd.concat([x[0] for x in list_main])
-        main_df2 = pd.concat([x[1] for x in list_main])
+    del batch1
+    main_df = pd.concat([x[0] for x in list_main])
+    main_df2 = pd.concat([x[1] for x in list_main])
 
-        main_df.to_pickle(data_folder + 'severson_main.pkl')
-        main_df2.to_pickle(data_folder + 'severson_main_dqlin.pkl')
-        print('Finished creating pandas dataframe from mat file.')
+    main_df.to_pickle(args.main_path + 'severson_main.pkl')
+    main_df2.to_pickle(args.main_path + 'severson_main_dqlin.pkl')
+    print('Finished creating pandas dataframe from mat file.')
 

@@ -4,11 +4,13 @@
 
 import argparse
 import os
+import pickle
 import sys
 from pathlib import Path
 
 import pandas as pd
 
+from Data.preprocess import preprocess
 from Data.read_data import data_maker, pandas_maker
 
 parser = argparse.ArgumentParser()
@@ -57,7 +59,7 @@ if __name__ == '__main__':
         args.file_name = 'data_2S2P.pkl'
     else:
         args.file_name = 'data_2P2S.pkl'
-
-
+    preprocess(args)
+    # batch1 = pickle.load(open(args.main_path + 'severson_main.pkl', 'rb'))
 
     sys.exit()
