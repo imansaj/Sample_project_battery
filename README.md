@@ -1,4 +1,4 @@
-# Estimation of State Of Health of battery cells by machine learning using experimental data.
+# Estimation of State Of Health of battery cells by machine learning using real-world data.
 
 ### Running notes
 I set the main folder for saving the data as 'D:/Severson_battery_data/' in the args.main_path.
