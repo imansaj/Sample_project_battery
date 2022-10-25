@@ -26,6 +26,9 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--resample_time', type=str, default='10s')
 
+# Main paths. Please change it as you desire.
+parser.add_argument('--main_path', type=str, default='D:/Severson_battery_data/')
+
 parser.add_argument('--random_state', type=int, default=10)
 parser.add_argument('--num_cells', type=int, default=12, help='The number of cells used for training. There are total '
                                                               'of 46 cells in the dataset.')
@@ -33,8 +36,6 @@ parser.add_argument('--num_cells', type=int, default=12, help='The number of cel
 args = parser.parse_args()
 
 if __name__ == '__main__':
-    # Main paths. Please change it as you desire.
-    args.main_path = 'D:/Severson_battery_data/'
     args.plot_path = args.main_path + 'plots/'
     if not os.path.exists(args.main_path):
         os.makedirs(args.main_path)
@@ -42,7 +43,7 @@ if __name__ == '__main__':
     if not os.path.exists(args.plot_path):
         os.makedirs(args.plot_path)
 
-    # The following class downloads the data and resmaple it for later use.
+    # The following class downloads the data and resample it for later use.
     initial_data = DataPrepare(args)
     initial_data.prepare()
 

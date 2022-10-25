@@ -72,6 +72,12 @@ def plot_one_cycle(df, args, serial_no='b1c0', Cycle_Index=1):
     lns1 = ax1.plot(temp['Time(h)'], temp['Current(A)'], color=color, linewidth=3.0, label='Current(A)')
     ax1.tick_params(axis='y', labelcolor=color)
 
+    # These lines produce the vertical lines for the documentation figure.
+    # ax1.axvline(0.17, linestyle='--', color='black', linewidth=1.5)
+    # ax1.axvline(0.322, linestyle='--', color='black', linewidth=1.5)
+    # ax1.axvline(0.465, linestyle='--', color='black', linewidth=1.5)
+    # ax1.axvline(0.704, linestyle='--', color='black', linewidth=1.5)
+
     ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
 
     color = 'tab:blue'
@@ -261,11 +267,16 @@ def plot_sections(final_df, args, conds, plot_ser='b1c0'):
     a = 2
     '''
     Sections:
-    I: Constant current (Charging)
-    II: Constant voltage (Charging)
-    III: Rest after charging
-    IV: Discharge
-    V: Rest After discharge
+    Section I: Charging region, Constant-current part 1
+
+    Section II: Charging region, Constant-current part 2
+    
+    Section III: Charging region, Constant-voltage
+    
+    Section IV: Discharging region
+    
+    Section V: Rest region
+
     '''
     ser = plot_ser
     col_list = ['Blues']
@@ -314,6 +325,17 @@ def plot_sections(final_df, args, conds, plot_ser='b1c0'):
         # *************************************
         # Group by Cycles -- Total -- Section III -- Slopes
         plot_sections_aux_2(final_df, conds, args, section='III', ser=ser, feat=feat, slope=True, colormap=colormap,
+                            offset=True,
+                            offset_value=0.05)
+
+        # *************************************
+        # Group by Cycles -- Total -- Section IV
+        plot_sections_aux_2(final_df, conds, args, section='IV', ser=ser, feat=feat, slope=False, colormap=colormap,
+                            offset=False, offset_value=0.05)
+
+        # *************************************
+        # Group by Cycles -- Total -- Section IV -- Slopes
+        plot_sections_aux_2(final_df, conds, args, section='IV', ser=ser, feat=feat, slope=True, colormap=colormap,
                             offset=True,
                             offset_value=0.05)
 
