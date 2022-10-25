@@ -56,7 +56,7 @@ more useful information from these curves.
 
 <img src="https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/one_cycle.jpg" width="600">
 
-Figure 4. The capacity versus cycle number for different cells.
+Figure 4. The defined sections of one cycle.
 
 As can be seen from figure 4 we can divide a voltage curve into 5 regions each with a physical meaning. The first three 
 regions are associated with charging. The fourth region is discharging section. and the fifth region is the rest section.
@@ -137,7 +137,7 @@ I used lightGBM for the modelling. The mean of RMSE on cross-validated parts is 
 0.00116. We can also plot the feature importance which gives us an idea of how important each feature is. For example,
 in figure 9 I plotted the importance of each section in the final results.
 
-<img src="https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/features_importance_region_Section.jpg" width="600">
+<img src="https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/features_importance_region_Section.png" width="600">
 
 Figure 9. The Feature importance of each section calculated by shap.
 
