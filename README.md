@@ -109,7 +109,7 @@ These will be our final features. we have 5 region and for each 7 features for s
 of 5x7x2 = 70 features. In figure 7 I plotted the features for region 1. As can be seen there is a relation between the
 capacity and extracted features.
 
-<img src="https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/features_serial(b1c0)_Voltage(V)__Is.jpg" width="600">
+<img src="https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/features_serial(b1c0)_Voltage(V)__I.jpg" width="600">
 
 Figure 7. The features for region 1. The number in the parentheses shows the mutual information between capacity and the
 corresponding feature.
