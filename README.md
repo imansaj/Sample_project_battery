@@ -18,7 +18,7 @@ as fast charge and discharge of the battery. In other words, the active part is 
 the new cell. These phenomena are called aging, and the term that we are usually more familiar with is battery health 
 (for example in the iPhones.) 
 
-![This is an image](/Documentation material/Aging schematic.png)
+![This is an image]([/Documentation material/Aging schematic.png](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/Aging%20schematic.png))
 
 Figure 1. The schematic of a cell after partial aging.
 
