@@ -12,11 +12,7 @@ from sklearn.model_selection import KFold
 
 
 def plot_capacity(df, args):
-    """
 
-    :param df:
-    :param args:
-    """
     font_text = {'family': 'Times New Roman',
                  'weight': 'bold',
                  'size': 14}
