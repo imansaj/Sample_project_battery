@@ -2,9 +2,11 @@
 
 ### Running notes
 I set the main folder for saving the data as 'D:/Severson_battery_data/' in the args.main_path.
-Please kindly change it as you desire.
+Please kindly change it as you desire. 
 
 The code will try to download the data which is around 3.01G.
+
+The first run will take longer due to downloading and resampling. The net runs will be much faster. 
 
 ### Data information
 The data information can be found here:
