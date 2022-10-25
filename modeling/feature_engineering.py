@@ -17,13 +17,16 @@ import pandas as pd
 class FeatureEngineering:
     def __init__(self, args, input=None, output=None):
         """
-        This class calculates the features for machine learning model.
-        There are five sections for each cycle:
-        1.	I, I = const.: Constant current (CC)
-        2.	II, V = const.: Constant Voltage(CV)
-        3.	III, I = 0: Rest (after charge)(OCV_III)
-        4.	IV: Discharge
-        5.	V, I = 0: Rest (after discharge)(OCV_V)
+        Sections:
+        Section I: Charging region, Constant-current part 1
+
+        Section II: Charging region, Constant-current part 2
+
+        Section III: Charging region, Constant-voltage
+
+        Section IV: Discharging region
+
+        Section V: Rest region
         """
         self.args = args
         self.input = input
@@ -42,13 +45,12 @@ class FeatureEngineering:
                ----------
                phys_var : str, optional
                    This can be either Voltage(V) or Current(A)
-                   :param phys_var:
-                   :param cond:
-                   :param section:
+                   :param phys_var: The physical feature used for this model.
+                   :param cond: For extracting the section.
+                   :param section: The section umber.
                """
         temp_list = ['', '_slope']
         for type_ in temp_list:
-            temp_str = 'cc_charge_' + phys_var + '_I_'
             temp_str = phys_var + f'_{section}' + type_
 
             d_names = {'sum': temp_str + '_sum', 'count': temp_str + '_duration', 'mean': temp_str + '_mean',

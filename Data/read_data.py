@@ -13,15 +13,13 @@ class DataPrepare:
     This class downloads the data, converts the downloaded mat file to pandas dataframe and resmaple it so that all the
     data are sampled at the same time span.
 
-    :param final_file:
-    :param args:
-    :param random_state:
-    :param final_file_path:
+    :param final_file: The final pandas is saved to a pickle for further use.
+    :param args: The global variables tha are passed around in the prohect.
+    :param final_file_path: The path for the saved pickle file.
     """
     def __init__(self, args):
         self.final_file = None
         self.args = args
-        self.random_state = args.random_state
         self.final_file_path = Path(self.args.main_path + 'severson_resampled.pkl')
 
     def prepare(self):
@@ -35,7 +33,7 @@ class DataPrepare:
 
     def download(self, url: str, fname: str):
         """
-
+        Downloading the data from cloud.
         :param url:
         :param fname:
         """
@@ -53,6 +51,10 @@ class DataPrepare:
                 bar.update(size)
 
     def data_maker(self):
+        """
+        Downloads the mat file from the cloud and converts it to a dict.
+        :return:
+        """
         filename = '2018-04-12_batchdata_updated_struct_errorcorrect.mat'
         my_file = Path(self.args.main_path + filename)
         if not my_file.is_file():
@@ -60,7 +62,7 @@ class DataPrepare:
             self.download("https://data.matr.io/1/api/v1/file/5c86bd64fa2ede00015ddbb2/download",
                           self.args.main_path + filename)
 
-        print('Starting converting mat file to batch file.')
+        print('Starting converting mat file to dict.')
         matFilename = self.args.main_path + filename
         f = h5py.File(matFilename)
         batch = f['batch']
@@ -106,7 +108,7 @@ class DataPrepare:
         # with open('D:/Severson_battery_data/self.final_file.pkl', 'wb') as fp:
         #     pickle.dump(bat_dict, fp)
 
-        print('Finished converting mat file to batch file.')
+        print('Finished converting mat file to dict.')
 
     def pandas_maker(self):
         print('Starting creating pandas dataframe from mat file.')
@@ -136,10 +138,7 @@ class DataPrepare:
 
         del self.final_file
         self.final_file = pd.concat(list_main)
-        # self.final_file2 = pd.concat([x[1] for x in list_main])
 
-        # self.final_file.to_pickle(args.main_path + 'severson_main.pkl')
-        # self.final_file2.to_pickle(args.main_path + 'severson_main_dqlin.pkl')
         print('Finished creating pandas dataframe from mat file.')
 
     def time_diff(self, df_temp):
@@ -151,13 +150,12 @@ class DataPrepare:
     def preprocess(self):
         print('Starting resampling pandas dataframe from main file.')
 
-        # self.final_file = pickle.load(open(args.main_path + 'severson_main.pkl', 'rb'))
         self.final_file['cycle_battery'] = self.final_file['cycle'].astype(str) + self.final_file['battery_name']
         self.final_file.rename(
             columns={'battery_name': 'serial_no', 'I': 'Current(A)', 'V': 'Voltage(V)', 'T': 'Temperature(C)',
                      'cycle': 'Cycle_Index'}, inplace=True)
 
-        # Unifying time.
+        # Unifying time by resampling.
         self.final_file = self.final_file.sort_values(by=['serial_no', 'Cycle_Index'])
 
         self.final_file = self.final_file.groupby(['serial_no', 'Cycle_Index']).apply(self.time_diff)
@@ -175,9 +173,6 @@ class DataPrepare:
         capacity_df.rename(columns={'Qd': 'Capacity', 'datetime_c2': 'datetime_c2_max'}, inplace=True)
         capacity_df.reset_index(inplace=True, drop=True)
 
-        # plot_capacity(capacity_df, args)
-
-        a = 2
         cyc_df_resampled.to_pickle(self.args.main_path + 'severson_resampled.pkl')
         capacity_df.to_pickle(self.args.main_path + 'capacity_df.pkl')
         print('Finished resampling main dataframe.')

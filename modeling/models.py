@@ -11,7 +11,12 @@ from plots.plots import plot_CV, feat_imp_plot_region, feat_imp_plot
 
 class MainModel:
     """
+    The main model class which create the train, test data using Kfold method, picks the top features using mutual
+    information and applies the model to the data, and save the results.
 
+    :param final_file: The final pandas is saved to a pickle for further use.
+    :param args: The global variables tha are passed around in the prohect.
+    :param no_features: The number of features used for the final model.
     """
     def __init__(self, args, no_features=15):
 
@@ -20,7 +25,14 @@ class MainModel:
         self.no_features = no_features
 
     def train_cv(self, df, splits=5, plot_flag=True, plot_importance=True):
-
+        """
+        The function that applies cross validation algorithm to the data.
+        :param df: The input data
+        :param splits: Number of splits used for kfold.
+        :param plot_flag: Eohter we wat to plto the data or not.
+        :param plot_importance: Either we wnat to plto the feature importance or not.
+        :return: Returns a pandas which has the results of the model applied to all cv parts.
+        """
         serial_no_list = df.serial_no.unique()
 
         input_columns = [x for x in list(df.columns) if
@@ -82,7 +94,7 @@ class MainModel:
 
     def model_(self):
         """
-
+        Returns the desired model.
         :return:
         """
         mod = LGBMRegressor()
@@ -90,9 +102,10 @@ class MainModel:
 
     def plot_importance(self, df, mask):
         """
-
-        :param df:
-        :param mask:
+        Plots the importance of each feature. The features used for this function are the ones selected by mutual
+        information.
+        :param df: The train dataset
+        :param mask: Top features
         """
         X_train_df = df[mask]
         explainer = shap.TreeExplainer(self.model)
