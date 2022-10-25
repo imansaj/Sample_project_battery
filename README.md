@@ -41,7 +41,7 @@ Voltage since it was like the pack design that we had.
 First to get a better understanding of the problem, we plot the voltage(our input) (figure 2) for one the cells as the
 cell ages and the capacity (the output) (figure 3) for all the cells.
 
-![This is an image](Documentation material/Sections_serial(b1c0)_Voltage(V)_full.jpg)
+![This is an image](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/Sections_serial(b1c0)_Voltage(V)_full.png)
 
 Figure 2. The evolution of one voltage cycle at different aging times for cell b1c0.
 
