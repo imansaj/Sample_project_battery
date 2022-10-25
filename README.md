@@ -18,7 +18,7 @@ as fast charge and discharge of the battery. In other words, the active part is 
 the new cell. These phenomena are called aging, and the term that we are usually more familiar with is battery health 
 (for example in the iPhones.) 
 
-![This is an image](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/Aging%20schematic.png)
+![figure 1](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/Aging%20schematic.png)
 
 Figure 1. The schematic of a cell after partial aging.
 
@@ -41,11 +41,11 @@ Voltage since it was like the pack design that we had.
 First to get a better understanding of the problem, we plot the voltage(our input) (figure 2) for one the cells as the
 cell ages and the capacity (the output) (figure 3) for all the cells.
 
-![This is an image](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/Sections_serial(b1c0)_Voltage(V)_full.png)
+![figure 2](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/Sections_serial(b1c0)_Voltage(V)_full.jpg)
 
 Figure 2. The evolution of one voltage cycle at different aging times for cell b1c0.
 
-![This is an image](Documentation material/Capacity_vs_cycles.png)
+![figure 3](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/Capacity_vs_cycles.png)
 
 Figure 3. The capacity versus cycle number for different cells.
 
@@ -54,7 +54,7 @@ number of cycles, but this alone is not sufficient to predict the aging, and we 
 better physical understanding of the problem we plot one cycle of voltage and current, and we explain how we can extract
 more useful information from these curves.
 
-![This is an image](Documentation material/one_cycle.jpg)
+![figure 4](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/one_cycle.jpg)
 
 Figure 4. The capacity versus cycle number for different cells.
 
@@ -83,11 +83,11 @@ Section V: Rest region
 Now we plot each of these sections for different cycles to see how to they change as the cell ages. We also plot their 
 slopes to see if these sections change faster also as the cell ages.
 
-![This is an image](Documentation material/Sections_serial(b1c0)_Voltage(V)_Section I.jpg)
+![Figure 5](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/Sections_serial(b1c0)_Voltage(V)_Section%20I.jpg)
 
 Figure 5. The voltage of section I versus time at different cycle numbers.
 
-![This is an image](Documentation material/Sections_serial(b1c0)_Voltage(V)_Section I slopes.jpg)
+![Figure 6](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/Sections_serial(b1c0)_Voltage(V)_Section%20I%20slopes.jpg)
 
 Figure 6. The slope of the voltage of section I versus time at different cycle numbers.
 
@@ -108,7 +108,7 @@ These will be our final features. we have 5 region and for each 7 features for s
 of 5x7x2 = 70 features. In figure 7 I plotted the features for region 1. As can be seen there is a relation between the
 capacity and extracted features.
 
-![This is an image](Documentation material/features_serial(b1c0)_Voltage(V)__I.jpg)
+![Figure 7](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/features_serial(b1c0)_Voltage(V)__I.jpg)
 
 Figure 7. The features for region 1. The number in the parentheses shows the mutual information between capacity and the
 corresponding feature.
@@ -127,7 +127,7 @@ used 5-fold splits for 12 cells.
 In figure 8 I plotted the results. For plotting these curves, the results of cross validation are saved at each iteration
 and then plotted together. The other plots can be found in the plots' folder.
 
-![This is an image](Documentation material/final_results_list(0).jpg)
+![Figure 8](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/final_results_list(0).jpg)
 
 Figure 8. The predicted capacity of each cell using the proposed model. The cells were randomly rotated into two groups 
 for training and testing. All the curves plotted here are from the testing group.
@@ -136,7 +136,7 @@ I used lightGBM for the modelling. The mean of RMSE on cross-validated parts is 
 0.00116. We can also plot the feature importance which gives us an idea of how important each feature is. For example,
 in figure 9 I plotted the importance of each section in the final results.
 
-![This is an image](Documentation material/features_importance_region_Section.png)
+![Figure 9](https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/features_importance_region_Section.png)
 
 Figure 9. The Feature importance of each section calculated by shap.
 
