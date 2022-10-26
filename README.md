@@ -1,4 +1,4 @@
-# Estimation of State Of Health of battery cells by machine learning using real-world data.
+# Real-life based estimation of State Of Health of battery cells by machine learning 
 
 
 Table of Contents
