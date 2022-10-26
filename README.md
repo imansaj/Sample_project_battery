@@ -21,7 +21,7 @@ Table of Contents
 [Results](#results)
 
 [Post analysis](#post-analysis)
-=================
+
 
 ### Running notes
 I set the main folder for saving the data as 'D:/Severson_battery_data/' in the args.main_path.
