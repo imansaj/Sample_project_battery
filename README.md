@@ -6,7 +6,7 @@ Please kindly change it as you desire.
 
 The code will try to download the data which is around 3.01G.
 
-The first run will take longer(5 min) due to downloading and resampling. The next runs will be much faster(87 seconds). 
+The first run will take longer(around 5 min on my PC) due to downloading and resampling. The next runs will be much faster(around 87 seconds). 
 
 ### Data information
 The data information can be found here:
@@ -160,14 +160,11 @@ The mean of RMSE on cross-validated parts is 0.00395 with a standard deviation o
 0.00116. The mean of r-squared score was one with a standard deviation of 0.0.
 
 ### Post analysis
-We can also plot the feature importance which gives us an idea of how important 
-each feature is. For example, in figure 10 I plotted the importance of each section in the final results.
+For the post analyis of the results, we can plot the feature importance which gives us an idea of how important 
+each feature is. The idea behind feature importance is that, once we have a working model, we can give the top selected features along with the training data to shap algorithm, and it gives us the importance of each feature. Then we can group features based on a desired facto and sum thier importance to see the importance of each factor. For example, in figure 10 I plotted the importance of each section in the final results. As can be seen, sections II and I have the highest importnace. This means that the charging part of the curve has the highest importance score for predicting the capacity. Therefore in practice we can put extra measures for measuring the charging part more accurately for better prediction of capacity.
 
 <img src="https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/features_importance_region_Section.png" width="600">
 
 Figure 10. The Feature importance of each section calculated by shap.
 
-### Conclusion
-In summary, here I showed that with research-based feature engineering we can solve a difficult problem with low loss
-and high performance. 
 
