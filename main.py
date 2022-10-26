@@ -16,6 +16,7 @@ https://data.matr.io/1/projects/5c48dd2bc625d700019f3204
 import argparse
 import os
 import sys
+import time
 
 from Data.read_data import DataPrepare
 from modeling.feature_extraction import DataPreprocess
@@ -36,6 +37,9 @@ parser.add_argument('--num_cells', type=int, default=12, help='The number of cel
 args = parser.parse_args()
 
 if __name__ == '__main__':
+
+    t0 = time.time()
+
     args.plot_path = args.main_path + 'plots/'
     if not os.path.exists(args.main_path):
         os.makedirs(args.main_path)
@@ -60,6 +64,8 @@ if __name__ == '__main__':
     final_df_ = final_df_.sort_values(by=['serial_no', 'Cycle_Index'])
     plot_final_results(final_df_, args)
 
+    t1 = time.time()
+    print(f'Total elapsed time:{t1-t0} seconds')
     print('Finished!')
 
     sys.exit()

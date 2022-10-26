@@ -82,6 +82,8 @@ class MainModel:
             self.plot_importance(train_df, mask)
         final_cv_df = pd.concat(final_df_list)
         feat_df = feat_df.fillna(0)
+        feat_df['mean_score'] = feat_df[score_columns].mean(axis=1)
+        feat_df['std_score'] = feat_df[score_columns].std(axis=1)
         feat_df['mean_loss'] = feat_df[loss_columns].mean(axis=1)
         feat_df['std_loss'] = feat_df[loss_columns].std(axis=1)
         feat_df.reset_index(inplace=True, drop=True)
@@ -90,6 +92,10 @@ class MainModel:
         print("The mean of RMSE is %0.5f with a standard deviation of %0.5f" % (feat_df.mean_loss.max(),
                                                                                 feat_df.loc[
                                                                                     feat_df.mean_loss.idxmax(), 'std_loss']))
+        print("The r-squared score is %0.2f with a standard deviation of %0.2f" % (feat_df.mean_score.max(),
+                                                                     feat_df.loc[
+                                                                         feat_df.mean_score.idxmax(), 'std_score']))
+
         return final_cv_df
 
     def model_(self):
@@ -133,18 +139,10 @@ class MainModel:
         feat_imp_plot(importance_df, self.args)
 
     def predict(self, X, mask):
-        """
-
-        :param X:
-        :param mask:
-        :return:
-        """
         X = X.sort_values(['serial_no', 'datetime_c2_max'])
         y = X['Capacity']
 
-        # *******************************************************************
         # Predicting capacity using last known capacity
-        # *******************************************************************
         def apply_last_value(df, cols, output):
             for i in df.index:
                 try:
@@ -152,7 +150,7 @@ class MainModel:
                         self.model.predict(df[cols].iloc[i - df.index[0]].values.reshape(1, -1))[
                             0]
                 except:
-                    a = 3
+                    pass
                 if i < df.index[-1]:
                     df.loc[i + 1, 'last_value'] = df.loc[i, f'pred_{output}']
             return df

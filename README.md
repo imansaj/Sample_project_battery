@@ -6,7 +6,7 @@ Please kindly change it as you desire.
 
 The code will try to download the data which is around 3.01G.
 
-The first run will take longer due to downloading and resampling. The net runs will be much faster. 
+The first run will take longer(5 min) due to downloading and resampling. The next runs will be much faster(87 seconds). 
 
 ### Data information
 The data information can be found here:
@@ -117,31 +117,55 @@ Figure 7. The features for region 1. The number in the parentheses shows the mut
 corresponding feature.
 
 ##### Feature selection and cross validation
-In general, it is not a good idea to use all the feature, since it will decrease the performance of the model. Here I 
-used mutual information to select the most important features. I used top 37 features selected for this algorithm. The 
-number 37 is found by trial and error.
+Using all of these features leads to poor model performance due to the high number of features known as the curse of 
+dimensionality. To avoid this, we reduce the number of features by using an algorithm called mutual information. 
+
+Mutual information calculates the dependency of two variables. The mutual information for two variables “a” and “b”, 
+gives us the information that we can get about “b” by investigating “a” and vice versa. By using this method, we can 
+find the most productive features in a set of features and only use them for training the model. So, with this method, 
+each feature (variable a) is compared to the capacity (variable b), and the features with the highest mutual information
+with capacity are used. More details are provided in the “Model and Results” section. I used top 37 features selected 
+for this algorithm. The number 37 is found by trial and error.
 
 Since the number of selected cells are small, to ensure that the model is generalizable we used cross-validation to 
-validate the model. For this method, the data were divided into equal parts and the model was trained and tested for
-each part separately. The mean of accuracy of cross-validation parts shows how our method performs on unseen data. I 
-used 5-fold splits for 12 cells.
+validate the model. For this method, the data were divided into 5 equal parts and the model was trained and tested for
+each part separately. This means that each cell is treated as unseen cell for each iteration of the cv algorithm, and 
+therefore our model perform much better in real practice. 
+
+### Model
+Since most of the hard work regarding the data science part is done on the feature engineering, most of the regression
+models in the scikit-learn will give good results. But for two reasons I used lightGbm: 
+
+- I needed a tree based model, so I can find the feature importance (using shap) for the post analysis of the results.
+- Among the tree-based models, lightGBM is the lightest both in terms of speed and the amount of space it uses, which 
+makes it ideal for real-life applications to be loaded on chipsets.
 
 ### Results
-In figure 8 I plotted the results. For plotting these curves, the results of cross validation are saved at each iteration
-and then plotted together. The other plots can be found in the plots' folder.
+In figure 8 and 9 I plotted the results. For plotting these curves, the results of cross validation are saved at each iteration
+and then all the curves are plotted together. 
 
 <img src="https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/final_results_list(0).jpg" width="600">
 
-Figure 8. The predicted capacity of each cell using the proposed model. The cells were randomly rotated into two groups 
-for training and testing. All the curves plotted here are from the testing group.
+Figure 8. The predicted capacity of first group of 6 cells using the proposed model. For plotting I split the 12 cells into 
+two groups of 6 for better visualization of the results. The cells were randomly rotated into two groups for training and
+testing. All the curves plotted here are from the test dataset.
 
-I used lightGBM for the modelling. The mean of RMSE on cross-validated parts is 0.00395 with a standard deviation of 
-0.00116. We can also plot the feature importance which gives us an idea of how important each feature is. For example,
-in figure 9 I plotted the importance of each section in the final results.
+<img src="https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/final_results_list(1).jpg" width="600">
+
+Figure 9. The predicted capacity of second group of 6 cells using the proposed model. For plotting I split the 12 cells 
+into two groups of 6 for better visualization of the results. The cells were randomly rotated into two groups for 
+training and testing. All the curves plotted here are from the test dataset.
+
+The mean of RMSE on cross-validated parts is 0.00395 with a standard deviation of 
+0.00116. The mean of r-squared score was one with a standard deviation of 0.0.
+
+### Post analysis
+We can also plot the feature importance which gives us an idea of how important 
+each feature is. For example, in figure 10 I plotted the importance of each section in the final results.
 
 <img src="https://github.com/imansaj/Sample_project_battery/blob/main/Documentation%20material/features_importance_region_Section.png" width="600">
 
-Figure 9. The Feature importance of each section calculated by shap.
+Figure 10. The Feature importance of each section calculated by shap.
 
 ### Conclusion
 In summary, here I showed that with research-based feature engineering we can solve a difficult problem with low loss
