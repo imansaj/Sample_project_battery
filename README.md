@@ -1,5 +1,27 @@
 # Estimation of State Of Health of battery cells by machine learning using real-world data.
 
+##### Table of Contents  
+
+
+[Running notes](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#running-notes)
+
+[Data information](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#data-information)
+
+[Problem definition](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#problem-definition)
+
+[Methods](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#methods)
+
+[Sections](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#sections)
+
+[Feature selection and cross validation](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#feature-selection-and-cross-validation)
+
+[Model](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#model)
+
+[Results](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#results)
+
+[Post analysis](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#post-analysis)
+
+
 ### Running notes
 I set the main folder for saving the data as 'D:/Severson_battery_data/' in the args.main_path.
 Please kindly change it as you desire. 
@@ -70,7 +92,7 @@ from three constant currents. For simplicity, we merged two of them in section I
 region. Section IV is the discharge region. And section V is the rest region when the current is zero and the cell is at
 its minimum voltage. In summary, we have these definitions for sections:
 
-##### Sections
+### Sections
 
 Section I: Charging region, Constant-current part 1
 
@@ -116,7 +138,7 @@ capacity and extracted features.
 Figure 7. The features for region 1. The number in the parentheses shows the mutual information between capacity and the
 corresponding feature.
 
-##### Feature selection and cross validation
+### Feature selection and cross validation
 Using all of these features leads to poor model performance due to the high number of features known as the curse of 
 dimensionality. To avoid this, we reduce the number of features by using an algorithm called mutual information. 
 
