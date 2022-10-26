@@ -4,28 +4,24 @@
 Table of Contents
 =================
 
+[Running notes](#running-notes)
 
-[Methods](#methods)  
+[Data information](#data-information)
 
+[Problem definition](#problem-definition)
 
-[Running notes](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#running-notes)
+[Methods](#methods)
 
-[Data information](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#data-information)
+[Sections](#sections)
 
-[Problem definition](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#problem-definition)
+[Feature selection and cross validation](#feature-selection-and-cross-validation)
 
-[Methods](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#methods)
+[Model](#model)
 
-[Sections](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#sections)
+[Results](#results)
 
-[Feature selection and cross validation](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#feature-selection-and-cross-validation)
-
-[Model](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#model)
-
-[Results](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#results)
-
-[Post analysis](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#post-analysis)
-
+[Post analysis](#post-analysis)
+=================
 
 ### Running notes
 I set the main folder for saving the data as 'D:/Severson_battery_data/' in the args.main_path.
