@@ -1,14 +1,12 @@
 # Estimation of State Of Health of battery cells by machine learning using real-world data.
 
 
-➥ ./gh-md-toc https://github.com/ekalinin/envirius/blob/master/README.md
-
 Table of Contents
 =================
 
-[link text itself]: https://github.com/imansaj/Sample_project_battery/edit/main/README.md#methods
 
-<project (https://github.com/imansaj/Sample_project_battery/edit/main/README.md#methods)#<Methods>
+[Methods](#methods)  
+
 
 [Running notes](https://github.com/imansaj/Sample_project_battery/edit/main/README.md#running-notes)
 
