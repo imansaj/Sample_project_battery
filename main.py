@@ -17,6 +17,7 @@ import argparse
 import os
 import sys
 import time
+from datetime import timedelta
 
 from Data.read_data import DataPrepare
 from modeling.feature_extraction import DataPreprocess
@@ -65,7 +66,7 @@ if __name__ == '__main__':
     plot_final_results(final_df_, args)
 
     t1 = time.time()
-    print(f'Total elapsed time:{t1-t0} seconds')
+    print(f'Total elapsed time:{timedelta(seconds=t1 - t0)}.')
     print('Finished!')
 
     sys.exit()
