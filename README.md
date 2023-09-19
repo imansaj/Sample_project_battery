@@ -35,9 +35,12 @@ The first run will take longer(around 5 min on my PC) due to downloading and res
 The data information can be found here:
 https://data.matr.io/1/projects/5c48dd2bc625d700019f3204
 
+### Goal
+Find the capacity drop of the battery using machine learning since it cannot be measured in the vehicle. 
+
 ### Problem definition
 
-The battery cells experience a loss of capacity as they are used. This is shown in Figure 1. as time passes the
+The battery cells experience a loss of capacity as they are used. This is shown in Figure 1, as time passes the
 unusable part, which is shown as rock content gets bigger, so we will have a lower capacity. This effect can be seen
 as fast charge and discharge of the battery. In other words, the active part is filled and drained much faster compared to
 the new cell. These phenomena are called aging, and the term that we are usually more familiar with is battery health 
