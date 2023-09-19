@@ -8,6 +8,8 @@ Table of Contents
 
 [Data information](#data-information)
 
+[Goal](#Goal)
+
 [Problem definition](#problem-definition)
 
 [Methods](#methods)
